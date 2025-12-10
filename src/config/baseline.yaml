@@ -1,0 +1,81 @@
+# src/config/experiments/baseline.yaml
+# Базовая конфигурация с BiGRU и TF-IDF
+
+# Модель
+embedding:
+  description_embedding_dim: 50
+  description_embedding_type: "word2vec"
+  use_tfidf: true
+  tfidf_max_features: 40000
+  use_entity_embedding: true
+  embedding_formula: "sqrt"
+
+rnn:
+  rnn_type: "GRU"
+  input_size: 50
+  hidden_size: 128
+  num_layers: 2
+  bidirectional: true
+  dropout: 0.3
+  batch_first: true
+  pooling_type: "both"
+
+dense:
+  dense_sizes: [512, 256, 64]
+  dropout_rate: 0.3
+  activation: "relu"
+  use_batch_norm: false
+  output_size: 1
+
+dropout_spatial: 0.2
+use_layer_norm: false
+init_method: "xavier"
+
+# Обучение
+optimizer:
+  optimizer_type: "adamw"
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 0.00000001
+  use_correct_wd: true
+  clip_grad_norm: 1.0
+
+scheduler:
+  scheduler_type: "cyclical"
+  base_lr: 0.001
+  max_lr: 0.01
+  cycle_size: 4
+  warmup_epochs: 2
+
+regularization:
+  l1_weight: 0.0
+  l2_weight: 0.0001
+  dropout_rate: 0.3
+  early_stopping_patience: 10
+  early_stopping_metric: "val_gini"
+  accumulation_steps: 1
+
+loss:
+  loss_type: "bce"
+  use_sample_weight: true
+  sample_weight_method: "temporal"
+
+num_epochs: 50
+batch_size: 128
+validation_batch_size: 256
+warmup_epochs: 2
+use_amp: true
+save_best_only: true
+checkpoint_metric: "val_gini"
+log_every_n_steps: 50
+validate_every_n_epochs: 1
+
+# Проект
+project_name: "credit-risk-model"
+experiment_name: "baseline"
+log_level: "INFO"
+use_clearml: true
+clearml_project: "credit-risk"
+seed: 42

@@ -1,0 +1,78 @@
+# src/config/experiments/lstm_advanced.yaml
+# Продвинутая конфигурация с LSTM и 3 слоями
+
+embedding:
+  description_embedding_dim: 50
+  description_embedding_type: "word2vec"
+  use_tfidf: true
+  tfidf_max_features: 40000
+  use_entity_embedding: true
+  embedding_formula: "sqrt"
+
+rnn:
+  rnn_type: "LSTM"
+  input_size: 50
+  hidden_size: 256
+  num_layers: 3
+  bidirectional: true
+  dropout: 0.4
+  batch_first: true
+  pooling_type: "both"
+
+dense:
+  dense_sizes: [512, 256, 128, 64]
+  dropout_rate: 0.3
+  activation: "relu"
+  use_batch_norm: false
+  output_size: 1
+
+dropout_spatial: 0.3
+use_layer_norm: true
+init_method: "kaiming"
+
+# Обучение
+optimizer:
+  optimizer_type: "adamw"
+  learning_rate: 0.0005
+  weight_decay: 0.00005
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 0.00000001
+  use_correct_wd: true
+  clip_grad_norm: 1.0
+
+scheduler:
+  scheduler_type: "cosine"
+  t_max: 100
+  eta_min: 0.000001
+  warmup_epochs: 5
+
+regularization:
+  l1_weight: 0.0
+  l2_weight: 0.00005
+  dropout_rate: 0.4
+  early_stopping_patience: 15
+  early_stopping_metric: "val_gini"
+  accumulation_steps: 2
+
+loss:
+  loss_type: "bce"
+  use_sample_weight: true
+  sample_weight_method: "temporal"
+
+num_epochs: 100
+batch_size: 64
+validation_batch_size: 256
+warmup_epochs: 5
+use_amp: true
+save_best_only: true
+checkpoint_metric: "val_gini"
+log_every_n_steps: 30
+validate_every_n_epochs: 1
+
+project_name: "credit-risk-model"
+experiment_name: "lstm_advanced"
+log_level: "INFO"
+use_clearml: true
+clearml_project: "credit-risk"
+seed: 42
