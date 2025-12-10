@@ -443,10 +443,11 @@ metrics_logger.save()
 
 ## Best Practices
 
-1. **Начните с baseline** - используйте `ModelConfig.get_baseline()` для первого прототипа
+1. **Начните с baseline** - используй `ModelConfig.get_baseline()` для первого прототипа
 2. **Cyclical LR для speed** - `SchedulerType.CYCLICAL` для быстрого обучения
 3. **Cosine для качества** - `SchedulerType.COSINE` для финального качества
 4. **AdamW вместо Adam** - правильная L2 регуляризация
-5. **Логируйте в ClearML** - отслеживайте все эксперименты
-6. **Используйте early stopping** - избежите переобучения
-7. **Сохраняйте checkpoints** - лучшую и последнюю модель
+5. **Логируйте в ClearML** - отслеживай все эксперименты
+6. **Используйте early stopping** - избегай переобучения
+7. **Сохраняйте checkpoints** - лучшую и последнюю модель...
+8. Эххх, удачи!!!!
