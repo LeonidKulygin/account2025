@@ -52,8 +52,8 @@ python train.py \
 ```bash
 python inference.py \
     --model-path outputs/checkpoints/best.pth \
-    --data-path data/test.csv \
-    --output-path predictions.csv
+    --data-path data/test.pq \
+    --output-path predictions.pq
 ```
 
 ##  Конфигурация
